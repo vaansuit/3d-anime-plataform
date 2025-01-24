@@ -1,15 +1,15 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
-    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    './app/**/*.{js,ts,jsx,tsx}', // Ensure it matches your file structure
   ],
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        'light-blue': '#81d4e2', // Define custom light blue color
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient( #81d4e2 )', // Radial gradient from light-blue at the edges to white at the center
       },
     },
   },
