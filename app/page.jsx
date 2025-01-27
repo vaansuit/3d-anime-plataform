@@ -4,17 +4,40 @@ import { useState, useRef } from 'react';
 import ThreeScene from './components/ThreeScene';
 import GlassCard from './components/GlassCard';
 import gsap from 'gsap';
+import { playlist } from './data/mockData';
 
 export default function Home() {
   const [isZoomedIn, setIsZoomedIn] = useState(false);
-  const [isCardContentChanged, setIsCardContentChanged] = useState(false);
+  const [isCardContentChanged, setIsCardContentChanged] = useState(false); // For transitioning content
+  const [showVideoContent, setShowVideoContent] = useState(false); // Dedicated to showing video content
+  const [currentPage, setCurrentPage] = useState(0); // Track the current page of videos
   const cameraRef = useRef(null);
+
+  const videosPerPage = 6;
+  const totalPages = Math.ceil(playlist.length / videosPerPage);
+
+  const startIndex = currentPage * videosPerPage;
+  const endIndex = startIndex + videosPerPage;
+  const currentVideos = playlist.slice(startIndex, endIndex);
+
+  const handleNext = (e) => {
+    e.stopPropagation(); // Stop event propagation
+    if (currentPage < totalPages - 1) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevious = (e) => {
+    e.stopPropagation(); // Stop event propagation
+    if (currentPage > 0) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
 
   // Function to zoom the camera using GSAP
   const zoomCamera = () => {
     const targetPosition = isZoomedIn ? { z: 1 } : { z: -0.2 }; // Define zoom positions
 
-    // Use GSAP to animate the camera zoom
     gsap.to(cameraRef.current.position, {
       duration: 2,
       z: targetPosition.z,
@@ -27,43 +50,41 @@ export default function Home() {
     setIsZoomedIn(!isZoomedIn); // Toggle zoom state
   };
 
-  // Function to handle GlassCard click and transition content
+  // Function to handle GlassCard click
   const handleCardClick = () => {
     if (!isCardContentChanged) {
-      // Fade out the current content
-      gsap.to(".glass-card-content", {
+      // When transitioning to the new card (zoom in)
+      gsap.to('.glass-card-content', {
         opacity: 0,
         duration: 1,
-        ease: "power2.out",
+        ease: 'power2.out',
         onComplete: () => {
-          // After the content fades out, zoom in the camera
           zoomCamera();
-          setIsCardContentChanged(true); // Change content to new card
-          
-          // Fade in the new content after zooming in
-          gsap.to(".glass-card-content", {
+          setIsCardContentChanged(true); // Toggle to the new card content
+          setShowVideoContent(true); // Show video content
+
+          gsap.to('.glass-card-content', {
             opacity: 1,
             duration: 1,
-            ease: "power2.out",
+            ease: 'power2.out',
           });
         },
       });
     } else {
-      // Fade out new content
-      gsap.to(".glass-card-content", {
+      // When transitioning back to the original card (zoom out)
+      gsap.to('.glass-card-content', {
         opacity: 0,
         duration: 1,
-        ease: "power2.out",
+        ease: 'power2.out',
         onComplete: () => {
-          // After the new content fades out, zoom out the camera
           zoomCamera();
-          setIsCardContentChanged(false); // Change content back to original card
-          
-          // Fade in the original content after zooming out
-          gsap.to(".glass-card-content", {
+          setIsCardContentChanged(false); // Toggle back to the original content
+          setShowVideoContent(false); // Hide video content
+
+          gsap.to('.glass-card-content', {
             opacity: 1,
             duration: 1,
-            ease: "power2.out",
+            ease: 'power2.out',
           });
         },
       });
@@ -79,19 +100,56 @@ export default function Home() {
       <div className="absolute inset-0 z-10 flex items-center justify-center">
         <GlassCard onCardClick={handleCardClick} className="glass-card">
           <div className="glass-card-content">
-            {isCardContentChanged ? (
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800">New Content</h2>
-                <p className="mt-2 text-gray-600">This is the new card content!</p>
+            {showVideoContent ? (
+              // Render video content
+              <div className="flex flex-col items-center space-y-6">
+                <h2 className="text-2xl font-bold text-gray-800">Playlist</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {currentVideos.map((video, index) => (
+                    <div
+                      key={index}
+                      className="flex flex-col items-center space-y-2 border rounded-lg p-4 shadow-lg bg-white/70"
+                    >
+                      <iframe
+                        width="280"
+                        height="157"
+                        src={video.videoUrl}
+                        title={video.title}
+                        frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        className="rounded-lg"
+                      ></iframe>
+                      <p className="text-sm font-semibold text-gray-800">{video.title}</p>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex space-x-4">
+                  <button
+                    onClick={handlePrevious}
+                    disabled={currentPage === 0}
+                    className="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300"
+                  >
+                    Previous
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    disabled={currentPage === totalPages - 1}
+                    className="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300"
+                  >
+                    Next
+                  </button>
+                </div>
               </div>
             ) : (
+              // Render the initial image and text
               <div className="flex flex-col items-center space-y-4">
                 <img
-                src="/thumbs/thumb-naruto-s1.jpg" 
-                alt="Welcome Image"
-                className="w-200 h-80 border-2 border-black shadow-xl object-cover"
+                  src="/thumbs/thumb-naruto-s1.jpg"
+                  alt="Welcome Image"
+                  className="w-200 h-80 border-2 border-black shadow-xl object-cover"
                 />
-</div>
+              </div>
             )}
           </div>
         </GlassCard>
