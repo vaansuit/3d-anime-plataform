@@ -122,7 +122,7 @@ export default function Home() {
             {showVideoContent ? (
               // Render video content
               <div className="flex flex-col items-center space-y-6">
-                <h2 className="text-2xl font-bold text-gray-800">Playlist</h2>
+                <h2 className="text-2xl font-bold text-gray-800">Lista de episódios</h2>
                 {isLoading ? (
                   <p>Loading videos...</p>
                 ) : error ? (
@@ -155,14 +155,14 @@ export default function Home() {
                         disabled={currentPage === 0}
                         className="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300"
                       >
-                        Previous
+                        Voltar
                       </button>
                       <button
                         onClick={handleNext}
                         disabled={currentPage === totalPages - 1}
                         className="px-4 py-2 bg-blue-500 text-white rounded-lg disabled:bg-gray-300"
                       >
-                        Next
+                        Próxima
                       </button>
                     </div>
                   </>
