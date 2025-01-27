@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 3D Anime Website
 
-## Getting Started
+🌐 [English](#english) | [Português (BR)](#português-br)
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## English
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🎉 Welcome to 3D Anime Website!
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+3D Anime Website is a web application that combines the power of 3D animation and a YouTube playlist. Explore an interactive 3D model and watch your favorite anime-related videos seamlessly!
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+### 🚀 Features
 
-To learn more about Next.js, take a look at the following resources:
+1. **3D Interaction**: A dynamic Rasengan model built with Three.js.
+2. **Glass-styled Cards**: Smooth transitions and interactive content.
+3. **YouTube Integration**: Displays videos fetched from a YouTube playlist.
+4. **Pagination**: Supports displaying more videos with a "Load More" button.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 🛠️ Technologies Used
 
-## Deploy on Vercel
+- **Next.js**: For server-side rendering and React-based development.
+- **Three.js**: To create the interactive 3D model.
+- **GSAP**: For smooth animations.
+- **Tailwind CSS**: For styling.
+- **YouTube API**: To fetch video data dynamically.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 🖥️ How to Run Locally
+
+1. Clone this repository:
+
+   ```bash
+   git clone https://github.com/your-username/3d-anime-website.git
+   cd 3d-anime-website
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Create an `.env.local` file in the root directory and add your YouTube API key:
+
+   ```env
+   YOUTUBE_API_KEY=your_api_key_here
+   ```
+
+4. Run the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open your browser and navigate to:
+
+   ```
+   http://localhost:3000
+   ```
+
