@@ -1,14 +1,11 @@
-# 3D Anime Website
+# 🌍 Language Switch / Trocar Idioma
 
-🌐 [English](#english) | [Português (BR)](#português-br)
+[English](./README.md) | [Português](./README-pt-br.md)
 
----
 
-## English
+### 🎉 Welcome to Animes3D!
 
-### 🎉 Welcome to 3D Anime Website!
-
-3D Anime Website is a web application that combines the power of 3D animation and a YouTube playlist. Explore an interactive 3D model and watch your favorite anime-related videos seamlessly!
+Animes3D is a web application that combines the power of 3D animation and a YouTube playlist. Explore an interactive 3D model and watch your favorite anime-related videos seamlessly!
 
 ---
 
