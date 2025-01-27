@@ -173,7 +173,7 @@ export default function Home() {
               <div className="flex flex-col items-center space-y-4">
                 <img
                   src="/thumbs/thumb-naruto-s1.jpg"
-                  alt="Welcome Image"
+                  alt="thumb"
                   className="w-200 h-80 border-2 border-black shadow-xl object-cover"
                 />
               </div>
